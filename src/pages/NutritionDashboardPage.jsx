@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import nutritionHtmlRaw from "../../../nutrition.html?raw";
-import nutritionCssRaw from "../../../nutrition.css?raw";
-import nutritionJsRaw from "../../../nutrition.js?raw";
+import nutritionHtmlRaw from "../components/nutrition.html?raw";
+import nutritionCssRaw from "../components/nutrition.css?raw";
+import nutritionJsRaw from "../components/nutrition.js?raw";
 
 function normalizeAssetPaths(value) {
   return value

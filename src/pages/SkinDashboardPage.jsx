@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import dashboardHtmlRaw from "../../../dashboard.html?raw";
-import dashboardCssRaw from "../../../index.css?raw";
-import dashboardJsRaw from "../../../index.js?raw";
+import dashboardHtmlRaw from "../components/dashboard.html?raw";
+import dashboardCssRaw from "../components/index.css?raw";
+import dashboardJsRaw from "../components/index.js?raw";
 
 function normalizeAssetPaths(value) {
   return value

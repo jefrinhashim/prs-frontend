@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>prs â€” Genetic Nutrition Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="nutrition.css" />
+</head>
+<body>
+
+<!-- ==================== LANDING PAGE ==================== -->
+<div id="landing-page" class="page">
+  <nav class="landing-nav">
+    <div class="nav-brand">
+      <div class="brand-dot"><span>p</span></div>
+      <span class="brand-name">prs</span>
+    </div>
+    <div class="nav-links">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#categories">Categories</a>
+      <a href="#" class="nav-cta" onclick="showDashboard(); return false;">Login</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Precision Genomic Analysis
+      </div>
+      <h1 class="hero-title">Your Genetic<br/><em>Nutrition</em> Report</h1>
+      <p class="hero-desc">Unlock the power of your DNA to understand metabolic efficiency, nutrient absorption, lipid profiles, and cardiovascular risk â€” powered by polygenic risk scoring from 500K+ genetic variants.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showDashboard()">View Sample Report</button>
+        <button class="btn-secondary" onclick="showDashboard()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+          Login to Account
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-pill"><strong>36</strong>Traits Analyzed</div>
+        <div class="stat-pill"><strong>500K+</strong>Variants Scored</div>
+        <div class="stat-pill"><strong>5</strong>Nutrition Categories</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-visual-card">
+        <div class="hvc-label">Alex Laurent Â· Report #NG-2024-0026</div>
+        <div class="hvc-name">Overall Genetic Nutrition Risk</div>
+        <div class="hvc-score-row">
+          <div class="hvc-big-score">78</div>
+          <div class="hvc-score-meta">
+            <div class="hvc-out">/100</div>
+            <div class="hvc-grade">High Risk</div>
+          </div>
+        </div>
+        <div class="hvc-bars">
+          <div class="hvc-bar-row">
+            <span class="hvc-bar-label">Fatty Acids</span>
+            <div class="hvc-bar-track"><div class="hvc-bar-fill" style="width:89%; background:var(--gold);"></div></div>
+            <span class="hvc-bar-pct">89%</span>
+          </div>
+          <div class="hvc-bar-row">
+            <span class="hvc-bar-label">Metabolic</span>
+            <div class="hvc-bar-track"><div class="hvc-bar-fill" style="width:72%; background:var(--sage);"></div></div>
+            <span class="hvc-bar-pct">72%</span>
+          </div>
+          <div class="hvc-bar-row">
+            <span class="hvc-bar-label">Vitamins</span>
+            <div class="hvc-bar-track"><div class="hvc-bar-fill" style="width:83%; background:var(--plum);"></div></div>
+            <span class="hvc-bar-pct">83%</span>
+          </div>
+          <div class="hvc-bar-row">
+            <span class="hvc-bar-label">Cardiovascular</span>
+            <div class="hvc-bar-track"><div class="hvc-bar-fill" style="width:87%; background:var(--terra);"></div></div>
+            <span class="hvc-bar-pct">87%</span>
+          </div>
+        </div>
+        <div class="hvc-footer">
+          <span class="hvc-tag">Analyzed Feb 15, 2026</span>
+          <span class="hvc-tag">36 traits</span>
+          <span class="hvc-tag">500K variants</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how-it-works" style="background: var(--white);">
+    <div class="section-eyebrow">Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <div class="step-icon-wrap blue">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        </div>
+        <h3>Submit Your DNA</h3>
+        <p>Upload your raw genetic data file from 23andMe, AncestryDNA, or any FASTQ/VCF format source.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <div class="step-icon-wrap green">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
+        </div>
+        <h3>Polygenic Risk Analysis</h3>
+        <p>Our algorithm computes PRS across 36 nutritional traits using peer-reviewed GWAS datasets and proprietary weighting.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <div class="step-icon-wrap gold">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+        </div>
+        <h3>Personalized Report</h3>
+        <p>Receive a detailed, actionable nutrition dashboard with risk scores, dietary insights, and tailored supplementation recommendations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="categories" style="background:var(--cream);">
+    <div class="section-eyebrow">Coverage</div>
+    <h2 class="section-title">What We Analyze</h2>
+    <div class="cat-grid">
+      <div class="cat-card lipids">
+        <span class="cat-emoji">ðŸ§¬</span>
+        <h3>Fatty Acid Profile</h3>
+        <p>Omega-3, omega-6, phospholipids, ceramides, and essential lipid ratios.</p>
+        <div class="cat-count">8 traits</div>
+      </div>
+      <div class="cat-card metabolic">
+        <span class="cat-emoji">âš¡</span>
+        <h3>Metabolic Efficiency</h3>
+        <p>Gut microbiome diversity, energy expenditure, insulin regulation, and resting metabolic rate.</p>
+        <div class="cat-count">7 traits</div>
+      </div>
+      <div class="cat-card vitamins">
+        <span class="cat-emoji">ðŸ’Š</span>
+        <h3>Vitamins & Micronutrients</h3>
+        <p>CoQ10, vitamin D, folate, manganese, molybdenum, and iron transport proteins.</p>
+        <div class="cat-count">7 traits</div>
+      </div>
+      <div class="cat-card cardio">
+        <span class="cat-emoji">â¤ï¸</span>
+        <h3>Cardiovascular Markers</h3>
+        <p>VLDL lipoproteins, phospholipid ratios, postprandial cholesterol, and PLA2 activity.</p>
+        <div class="cat-count">7 traits</div>
+      </div>
+      <div class="cat-card protein">
+        <span class="cat-emoji">ðŸ”¬</span>
+        <h3>Protein Building Blocks</h3>
+        <p>Amino acid metabolism, peptide enzymes, and neurotransmitter precursors.</p>
+        <div class="cat-count">7 traits</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="landing-footer">
+    <div class="footer-brand">
+      <span class="brand-name">prs</span>
+      <p>Advancing nutrition through genomics.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Scientific References</a>
+      <a href="#">Contact</a>
+    </div>
+    <div class="footer-note">Â© 2026 NutriGenix. For informational purposes only. Not medical advice.</div>
+  </footer>
+</div>
+
+<!-- ==================== DASHBOARD ==================== -->
+<div id="dashboard-page" class="page active">
+
+  <!-- MOBILE TOPBAR -->
+  <div class="mobile-topbar">
+    <div class="mobile-topbar-brand">
+      <div class="sb-brand-dot"><span>p</span></div>
+      <span class="sb-brand-name">prs</span>
+    </div>
+    <button class="mobile-hamburger" id="hamburger-btn" onclick="toggleSidebar()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+  <div class="dashboard-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sb-brand-dot"><span>p</span></div>
+      <span class="sb-brand-name">prs</span>
+    </div>
+    <div class="user-profile">
+      <div class="avatar">AL</div>
+      <div class="user-info">
+        <span class="user-name">Alex Laurent</span>
+        <span class="user-tag">P00026401WG</span>
+      </div>
+    </div>
+    <div class="sidebar-search">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="8" stroke="rgba(0,0,0,0.3)" stroke-width="2"/><path d="m21 21-4.35-4.35" stroke="rgba(0,0,0,0.3)" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="trait-search" placeholder="Search traits..." oninput="filterTraits(this.value)" />
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Dashboard</div>
+      <a href="#" class="nav-item active" data-view="overview" onclick="showView('overview'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+        Overview
+      </a>
+      <div class="nav-group-label">Categories</div>
+      <a href="#" class="nav-item" data-view="lipids" onclick="showView('lipids'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+        Fatty Acid Profile
+        <span class="nav-badge badge-danger">2 Very High</span>
+      </a>
+      <a href="#" class="nav-item" data-view="metabolic" onclick="showView('metabolic'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.28L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z"/></svg>
+        Metabolic Efficiency
+        <span class="nav-badge badge-danger">1 Very High</span>
+      </a>
+      <a href="#" class="nav-item" data-view="vitamins" onclick="showView('vitamins'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+        Vitamins & Micronutrients
+        <span class="nav-badge badge-high">2 High</span>
+      </a>
+      <a href="#" class="nav-item" data-view="cardio" onclick="showView('cardio'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Cardiovascular Markers
+        <span class="nav-badge badge-high">5 High</span>
+      </a>
+      <a href="#" class="nav-item" data-view="protein" onclick="showView('protein'); return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/></svg>
+        Protein Building Blocks
+        <span class="nav-badge badge-high">1 High</span>
+      </a>
+      <div class="nav-group-label">Tools</div>
+    
+      <a href="#" class="nav-item download-btn" onclick="return false;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Download Report
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <h2 id="page-title">Overview</h2>
+        <span id="page-subtitle">Genetic Nutrition Health Summary</span>
+      </div>
+      <div class="topbar-right">
+        <div class="filter-group">
+          <span class="filter-label">Filter:</span>
+          <select id="risk-filter" onchange="filterByRisk(this.value)">
+            <option value="all">All Levels</option>
+            <option value="very-high">Very High</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="very-low">Very Low</option>
+          </select>
+        </div>
+        <div class="report-date">Feb 15, 2026</div>
+      </div>
+    </header>
+
+    <div class="views-container">
+      <!-- OVERVIEW -->
+      <div id="view-overview" class="view active">
+
+        <div class="bento-grid">
+          <div class="bento-card" style="grid-column:1 / -1; padding:24px; background:linear-gradient(135deg,#142235 0%,#2D435D 100%); color:#F8F5EF; border:1px solid rgba(255,255,255,0.08); box-shadow:0 24px 70px rgba(15,23,42,0.18);">
+            <div style="display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:16px;">
+              <div>
+                <div class="card-title" style="margin-bottom:8px; color:rgba(248,245,239,0.72);">Overview Summary</div>
+                <h3 style="margin:0; font-size:30px; line-height:1.15; letter-spacing:-0.03em;">Your nutrition report is led by lipid transport, cardiovascular markers, and metabolic response.</h3>
+              </div>
+              <div style="padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.08); font-size:12px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:rgba(248,245,239,0.82);">
+                36 traits analyzed
+              </div>
+            </div>
+            <p style="margin:18px 0 0; max-width:900px; font-size:14px; line-height:1.85; color:rgba(248,245,239,0.74);">
+              The strongest signals in this profile cluster around fatty acid balance, triglyceride-rich lipoproteins, and gut-metabolic efficiency. The biggest practical wins from this overview are improving fat quality, reducing refined carbohydrate load, and using lab follow-up to personalize vitamin and cardiovascular support.
+            </p>
+            <div style="display:grid; gap:12px; margin-top:20px; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">
+              <div style="border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.08); padding:16px;">
+                <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(248,245,239,0.45);">Highest Focus</div>
+                <div style="margin-top:8px; font-size:17px; font-weight:600; color:#F8F5EF;">Fatty Acids</div>
+                <div style="margin-top:6px; font-size:13px; line-height:1.6; color:rgba(248,245,239,0.68);">Inflammatory lipid balance is the clearest top-priority pattern.</div>
+              </div>
+              <div style="border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.08); padding:16px;">
+                <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(248,245,239,0.45);">Immediate Habit</div>
+                <div style="margin-top:8px; font-size:17px; font-weight:600; color:#F8F5EF;">Lipid-friendly eating</div>
+                <div style="margin-top:6px; font-size:13px; line-height:1.6; color:rgba(248,245,239,0.68);">Prioritize omega-3 support, fiber, and lower ultra-processed fat intake.</div>
+              </div>
+              <div style="border-radius:18px; border:1px solid rgba(255,255,255,0.08); background:rgba(255,255,255,0.08); padding:16px;">
+                <div style="font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(248,245,239,0.45);">Clinical Follow-up</div>
+                <div style="margin-top:8px; font-size:17px; font-weight:600; color:#F8F5EF;">Cardio labs</div>
+                <div style="margin-top:6px; font-size:13px; line-height:1.6; color:rgba(248,245,239,0.68);">Use blood lipids and micronutrient panels to refine the plan over time.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card bento-score" style="padding: 20px 18px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div class="card-title" style="margin-bottom:0;">Your Risk Categories</div>
+              <a onclick="showView('lipids')" style="font-size:12px;font-weight:600;color:var(--sage-d);cursor:pointer;text-decoration:none;">See all</a>
+            </div>
+            <div class="rc-list">
+
+              <div class="rc-item" onclick="toggleRcItem(this)">
+                <div class="rc-item-head">
+                  <div class="rc-icon rc-icon--red">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                  </div>
+                  <div class="rc-meta">
+                    <div class="rc-name">Fatty Acid Profile <span class="rc-badge rc-badge--vh">Very High</span></div>
+                    <div class="rc-sub">PRS 2.41</div>
+                  </div>
+                  <svg class="rc-chevron rc-chevron--up" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M18 15l-6-6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="rc-expand-body">
+                  <div class="rc-tags">
+                    <span class="rc-tag">Diacylglycerol</span>
+                    <span class="rc-tag">Phosphatidylcholine</span>
+                    <span class="rc-tag">Linoleic Acid</span>
+                  </div>
+                  <p class="rc-desc">Multiple lipid transport and membrane-signaling traits cluster at the top end of risk, suggesting a strong genetic tendency toward inflammatory fatty acid imbalance.</p>
+                  <div class="rc-footer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--muted-l)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Lipids ï¿½ Omega-3 support and fat quality matter most</span>
+                    <span class="rc-time">Top priority</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rc-item" onclick="toggleRcItem(this)">
+                <div class="rc-item-head">
+                  <div class="rc-icon rc-icon--amber">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2.05v2.02c3.95.49 7 3.85 7 7.93 0 3.21-1.81 6-4.72 7.28L13 17v5h5l-1.22-1.22C19.91 19.07 22 15.76 22 12c0-5.18-3.95-9.45-9-9.95zM11 2.05C5.95 2.55 2 6.82 2 12c0 3.76 2.09 7.07 5.22 8.78L6 22h5V2.05z"/></svg>
+                  </div>
+                  <div class="rc-meta">
+                    <div class="rc-name">Metabolic Efficiency <span class="rc-badge rc-badge--vh">Very High</span></div>
+                    <div class="rc-sub">PRS 2.53</div>
+                  </div>
+                  <svg class="rc-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="rc-expand-body">
+                  <div class="rc-tags">
+                    <span class="rc-tag">Intestinal Microbiota</span>
+                    <span class="rc-tag">Blautia</span>
+                    <span class="rc-tag">Insulin</span>
+                  </div>
+                  <p class="rc-desc">Your microbiome diversity and energy-regulation signals suggest a meaningful metabolic vulnerability that can compound inflammation if routine nutrition is inconsistent.</p>
+                  <div class="rc-footer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--muted-l)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Metabolic ï¿½ Fiber intake and gut support are essential</span>
+                    <span class="rc-time">Action now</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rc-item" onclick="toggleRcItem(this)">
+                <div class="rc-item-head">
+                  <div class="rc-icon rc-icon--blue">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                  </div>
+                  <div class="rc-meta">
+                    <div class="rc-name">Cardio & Micronutrients <span class="rc-badge rc-badge--h">High</span></div>
+                    <div class="rc-sub">PRS 1.88</div>
+                  </div>
+                  <svg class="rc-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="rc-expand-body">
+                  <div class="rc-tags">
+                    <span class="rc-tag">VLDL Phospholipids</span>
+                    <span class="rc-tag">CoQ10</span>
+                    <span class="rc-tag">Blood Molybdenum</span>
+                  </div>
+                  <p class="rc-desc">Cardiovascular particle transport markers and nutrient-handling traits indicate elevated dietary sensitivity, especially around lipid load and micronutrient balance.</p>
+                  <div class="rc-footer">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="var(--muted-l)"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    <span>Cardio/Vitamins ï¿½ Focus on blood-lipid friendly nutrition</span>
+                    <span class="rc-time">Monitor</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="bento-card bento-dist">
+            <div class="dist2-header">
+              <div class="dist2-title-block">
+                <span class="card-title" style="margin-bottom:0;">Risk Distribution</span>
+                <span class="dist2-subtitle">36 traits ï¿½ tap to expand</span>
+              </div>
+              <div class="dist2-donut">
+                <svg viewBox="0 0 36 36" width="46" height="46">
+                  <circle class="donut-seg" stroke="var(--risk-very-low)" stroke-dasharray="8.3 91.7" stroke-dashoffset="0"/>
+                  <circle class="donut-seg" stroke="var(--risk-low)" stroke-dasharray="11.1 88.9" stroke-dashoffset="-8.3"/>
+                  <circle class="donut-seg" stroke="var(--risk-medium)" stroke-dasharray="38.9 61.1" stroke-dashoffset="-19.4"/>
+                  <circle class="donut-seg" stroke="var(--risk-high)" stroke-dasharray="33.3 66.7" stroke-dashoffset="-58.3"/>
+                  <circle class="donut-seg" stroke="var(--risk-very-high)" stroke-dasharray="8.3 91.7" stroke-dashoffset="-91.6"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="dist2-rows">
+              <div class="dist2-row dist2-row-vh" onclick="toggleDist2(this)">
+                <div class="dist2-row-top">
+                  <div class="dist2-pip dist2-pip-vh"></div>
+                  <span class="dist2-lbl">Very High</span>
+                  <div class="dist2-bar-wrap"><div class="dist2-bar dist2-bar-vh" style="width:22%"></div></div>
+                  <span class="dist2-count dist2-count-vh">3</span>
+                  <svg class="dist2-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dist2-traits" style="display:none">
+                  <span class="dist2-chip">Diacylglycerol</span>
+                  <span class="dist2-chip">Phosphatidylcholine</span>
+                  <span class="dist2-chip">Intestinal Microbiota</span>
+                </div>
+              </div>
+
+              <div class="dist2-row dist2-row-h" onclick="toggleDist2(this)">
+                <div class="dist2-row-top">
+                  <div class="dist2-pip dist2-pip-h"></div>
+                  <span class="dist2-lbl">High</span>
+                  <div class="dist2-bar-wrap"><div class="dist2-bar dist2-bar-h" style="width:86%"></div></div>
+                  <span class="dist2-count dist2-count-h">12</span>
+                  <svg class="dist2-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dist2-traits" style="display:none">
+                  <span class="dist2-chip">Linoleic Acid</span>
+                  <span class="dist2-chip">% MUFA</span>
+                  <span class="dist2-chip">DHA %</span>
+                  <span class="dist2-chip">VLDL Phospholipids</span>
+                  <span class="dist2-chip">Coenzyme Q10</span>
+                  <span class="dist2-chip">Carnitine Levels</span>
+                </div>
+              </div>
+
+              <div class="dist2-row dist2-row-m" onclick="toggleDist2(this)">
+                <div class="dist2-row-top">
+                  <div class="dist2-pip dist2-pip-m"></div>
+                  <span class="dist2-lbl">Medium</span>
+                  <div class="dist2-bar-wrap"><div class="dist2-bar dist2-bar-m" style="width:100%"></div></div>
+                  <span class="dist2-count dist2-count-m">14</span>
+                  <svg class="dist2-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dist2-traits" style="display:none">
+                  <span class="dist2-chip">Blautia Abundance</span>
+                  <span class="dist2-chip">Blood Manganese</span>
+                  <span class="dist2-chip">Acetone Levels</span>
+                  <span class="dist2-chip">Resting Metabolic Rate</span>
+                  <span class="dist2-chip">Adiponectin</span>
+                </div>
+              </div>
+
+              <div class="dist2-row dist2-row-l" onclick="toggleDist2(this)">
+                <div class="dist2-row-top">
+                  <div class="dist2-pip dist2-pip-l"></div>
+                  <span class="dist2-lbl">Low</span>
+                  <div class="dist2-bar-wrap"><div class="dist2-bar dist2-bar-l" style="width:29%"></div></div>
+                  <span class="dist2-count dist2-count-l">4</span>
+                  <svg class="dist2-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dist2-traits" style="display:none">
+                  <span class="dist2-chip">Citrulline Levels</span>
+                  <span class="dist2-chip">Ceramide Levels</span>
+                  <span class="dist2-chip">Amino Acid Balance</span>
+                  <span class="dist2-chip">Protein Recovery</span>
+                </div>
+              </div>
+
+              <div class="dist2-row dist2-row-vl" onclick="toggleDist2(this)">
+                <div class="dist2-row-top">
+                  <div class="dist2-pip dist2-pip-vl"></div>
+                  <span class="dist2-lbl">Very Low</span>
+                  <div class="dist2-bar-wrap"><div class="dist2-bar dist2-bar-vl" style="width:22%"></div></div>
+                  <span class="dist2-count dist2-count-vl">3</span>
+                  <svg class="dist2-chevron" width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="dist2-traits" style="display:none">
+                  <span class="dist2-chip">Protective Protein Markers</span>
+                  <span class="dist2-chip">Carnosine Preservation</span>
+                  <span class="dist2-chip">Low Deficit Traits</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card bento-priority">
+            <div class="card-title">Priority Attention</div>
+            <div class="priority-list">
+              <div class="priority-item" onclick="showView('lipids')">
+                <div class="priority-dot" style="background:var(--risk-very-high)"></div>
+                <span class="priority-name">Diacylglycerol</span>
+                <span class="priority-badge" style="background:rgba(242,90,0,0.12);color:var(--risk-very-high);">V. HIGH</span>
+              </div>
+              <div class="priority-item" onclick="showView('lipids')">
+                <div class="priority-dot" style="background:var(--risk-very-high)"></div>
+                <span class="priority-name">Phosphatidylcholine</span>
+                <span class="priority-badge" style="background:rgba(242,90,0,0.12);color:var(--risk-very-high);">V. HIGH</span>
+              </div>
+              <div class="priority-item" onclick="showView('metabolic')">
+                <div class="priority-dot" style="background:var(--risk-very-high)"></div>
+                <span class="priority-name">Intestinal Microbiota</span>
+                <span class="priority-badge" style="background:rgba(242,90,0,0.12);color:var(--risk-very-high);">V. HIGH</span>
+              </div>
+              <div class="priority-item" onclick="showView('cardio')">
+                <div class="priority-dot" style="background:var(--risk-high)"></div>
+                <span class="priority-name">VLDL Phospholipids</span>
+                <span class="priority-badge" style="background:rgba(255,176,103,0.22);color:#b86319;">HIGH</span>
+              </div>
+              <div class="priority-item" onclick="showView('vitamins')">
+                <div class="priority-dot" style="background:var(--risk-high)"></div>
+                <span class="priority-name">Coenzyme Q10</span>
+                <span class="priority-badge" style="background:rgba(255,176,103,0.22);color:#b86319;">HIGH</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bento-card bento-cat cat-accent-derm" onclick="showView('lipids')" style="cursor:pointer;">
+            <div class="card-title">Fatty Acids</div>
+            <div class="cat-summary-num">8</div>
+            <div class="cat-summary-label">traits analyzed</div>
+            <div class="cat-summary-bar"><div class="cat-summary-fill" style="width:89%;background:var(--risk-very-high);"></div></div>
+            <div class="cat-summary-sub">2 Very High ï¿½ 5 High</div>
+          </div>
+          <div class="bento-card bento-cat cat-accent-allergies" onclick="showView('metabolic')" style="cursor:pointer;">
+            <div class="card-title">Metabolic</div>
+            <div class="cat-summary-num">7</div>
+            <div class="cat-summary-label">traits analyzed</div>
+            <div class="cat-summary-bar"><div class="cat-summary-fill" style="width:72%;background:var(--risk-high);"></div></div>
+            <div class="cat-summary-sub">1 Very High ï¿½ 5 Medium</div>
+          </div>
+          <div class="bento-card bento-cat cat-accent-markers" onclick="showView('vitamins')" style="cursor:pointer;">
+            <div class="card-title">Vitamins</div>
+            <div class="cat-summary-num">7</div>
+            <div class="cat-summary-label">traits analyzed</div>
+            <div class="cat-summary-bar"><div class="cat-summary-fill" style="width:83%;background:var(--risk-medium);"></div></div>
+            <div class="cat-summary-sub">2 High ï¿½ 5 Medium</div>
+          </div>
+          <div class="bento-card bento-cat cat-accent-aesthetics" onclick="showView('cardio')" style="cursor:pointer;">
+            <div class="card-title">Cardiovascular</div>
+            <div class="cat-summary-num">7</div>
+            <div class="cat-summary-label">traits analyzed</div>
+            <div class="cat-summary-bar"><div class="cat-summary-fill" style="width:87%;background:var(--risk-low);"></div></div>
+            <div class="cat-summary-sub">5 High ï¿½ 2 Medium</div>
+          </div>
+          <div class="bento-card bento-cat cat-accent-markers" onclick="showView('protein')" style="cursor:pointer;">
+            <div class="card-title">Protein</div>
+            <div class="cat-summary-num">7</div>
+            <div class="cat-summary-label">traits analyzed</div>
+            <div class="cat-summary-bar"><div class="cat-summary-fill" style="width:63%;background:var(--risk-very-low);"></div></div>
+            <div class="cat-summary-sub">1 High ï¿½ Mostly Low/Medium</div>
+          </div>
+
+          <div class="bento-card bento-radar" id="polarCardWrap">
+            <div class="polar-header">
+              <div class="card-title" style="margin-bottom:2px;">Category Risk Profile</div>
+              <div class="polar-overall-badge">36 traits</div>
+            </div>
+
+            <div class="ring-wrap">
+              <svg id="ringSvg" viewBox="0 0 200 200" class="ring-svg">
+                <circle cx="100" cy="100" r="88" fill="none" stroke="#F0EBE3" stroke-width="1"/>
+                <circle cx="100" cy="100" r="66" fill="none" stroke="#F0EBE3" stroke-width="1"/>
+                <circle cx="100" cy="100" r="44" fill="none" stroke="#F0EBE3" stroke-width="1"/>
+                <g id="ringSegments"></g>
+                <circle cx="100" cy="100" r="30" fill="#fff" filter="url(#ringShadow)"/>
+                <defs>
+                  <filter id="ringShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="0" dy="1" stdDeviation="3" flood-color="rgba(0,0,0,0.08)"/>
+                  </filter>
+                </defs>
+                <text id="ringCentreVal" x="100" y="97" text-anchor="middle" class="ring-centre-val">36</text>
+                <text id="ringCentreLbl" x="100" y="110" text-anchor="middle" class="ring-centre-lbl">traits</text>
+              </svg>
+            </div>
+
+            <div class="ring-legend" id="ringLegend">
+              <div class="rl-item" data-idx="0">
+                <div class="rl-left"><span class="rl-swatch" style="--c:#D4A853"></span><span class="rl-name">Fatty Acids</span></div>
+                <div class="rl-right"><div class="rl-bar-track"><div class="rl-bar" style="--w:100%;--c:#D4A853"></div></div><span class="rl-count">8</span></div>
+              </div>
+              <div class="rl-item" data-idx="1">
+                <div class="rl-left"><span class="rl-swatch" style="--c:#C1634A"></span><span class="rl-name">Cardiovascular</span></div>
+                <div class="rl-right"><div class="rl-bar-track"><div class="rl-bar" style="--w:88%;--c:#C1634A"></div></div><span class="rl-count">7</span></div>
+              </div>
+              <div class="rl-item" data-idx="2">
+                <div class="rl-left"><span class="rl-swatch" style="--c:#7B9E87"></span><span class="rl-name">Metabolic</span></div>
+                <div class="rl-right"><div class="rl-bar-track"><div class="rl-bar" style="--w:88%;--c:#7B9E87"></div></div><span class="rl-count">7</span></div>
+              </div>
+              <div class="rl-item" data-idx="3">
+                <div class="rl-left"><span class="rl-swatch" style="--c:#8B5E83"></span><span class="rl-name">Vitamins</span></div>
+                <div class="rl-right"><div class="rl-bar-track"><div class="rl-bar" style="--w:88%;--c:#8B5E83"></div></div><span class="rl-count">7</span></div>
+              </div>
+              <div class="rl-item" data-idx="4">
+                <div class="rl-left"><span class="rl-swatch" style="--c:#6BAED6"></span><span class="rl-name">Protein</span></div>
+                <div class="rl-right"><div class="rl-bar-track"><div class="rl-bar" style="--w:88%;--c:#6BAED6"></div></div><span class="rl-count">7</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIPIDS -->
+      <div id="view-lipids" class="view">
+        <div class="view-intro">Fatty acid profile traits reflect your genetic predisposition for lipid metabolism, membrane composition, and essential fatty acid levels.</div>
+        <div class="traits-grid">
+          <div class="trait-card" data-risk="very-high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-very-high" style="width:90%"></div></div>
+            <div class="trait-header"><span class="trait-name">Diacylglycerol (18:1 & 20:4)</span><span class="risk-badge risk-very-high">Very High</span></div>
+            <p class="trait-desc">Complex lipid signaling molecules involved in inflammation and cellular communication. Very high genetic levels may promote systemic inflammatory processes and metabolic disruption.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 2.41</span><span class="trait-pop">90th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="very-high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-very-high" style="width:90%"></div></div>
+            <div class="trait-header"><span class="trait-name">Phosphatidylcholine (18:0/18:2)</span><span class="risk-badge risk-very-high">Very High</span></div>
+            <p class="trait-desc">Cell membrane phospholipid critical for brain function and liver health. Elevated levels may indicate heightened phospholipid turnover and require careful dietary fat management.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 2.38</span><span class="trait-pop">90th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:89%"></div></div>
+            <div class="trait-header"><span class="trait-name">Linoleic Acid</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Essential omega-6 fatty acid. High genetic levels may skew the omega-6 to omega-3 ratio, promoting pro-inflammatory pathways â€” especially relevant given your cardiovascular risk profile.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.94</span><span class="trait-pop">89th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:92%"></div></div>
+            <div class="trait-header"><span class="trait-name">% Monounsaturated Fatty Acids</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Healthy fat proportion in plasma. High MUFA levels are generally favorable but may reflect elevated olive oil metabolism or lipid synthesis rates that could interact with your VLDL markers.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 2.01</span><span class="trait-pop">92nd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:87%"></div></div>
+            <div class="trait-header"><span class="trait-name">DHA % in Total Fatty Acids</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Omega-3 brain and heart fat. Elevated DHA percentage genetically may reflect high enzymatic conversion efficiency â€” a beneficial marker, though monitoring total lipid balance is still advised.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.87</span><span class="trait-pop">87th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:81%"></div></div>
+            <div class="trait-header"><span class="trait-name">Carnitine Levels</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Fatty acid transport molecule essential for mitochondrial energy production. High genetic carnitine predicts efficient fat burning but may also signal elevated TMAO production risk in some individuals.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.73</span><span class="trait-pop">81st percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="low" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-low" style="width:16%"></div></div>
+            <div class="trait-header"><span class="trait-name">Ceramide Levels (41:2)</span><span class="risk-badge risk-low">Low</span></div>
+            <p class="trait-desc">Lipid barrier and signaling ceramide. Low genetic levels of this specific ceramide species are generally neutral but should be monitored alongside your broader lipid and inflammatory profile.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 0.71</span><span class="trait-pop">16th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="lipids">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:49%"></div></div>
+            <div class="trait-header"><span class="trait-name">Stearic & Linoleic Acid Ratio</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Saturated to PUFA balance indicator. A medium ratio suggests a relatively balanced lipid metabolism, though dietary choices can significantly modulate this genetic set point.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.19</span><span class="trait-pop">49th percentile</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- METABOLIC -->
+      <div id="view-metabolic" class="view">
+        <div class="view-intro">Metabolic efficiency traits reflect genetic predisposition for energy utilization, gut microbiome composition, and hormonal regulation of metabolism.</div>
+        <div class="traits-grid">
+          <div class="trait-card" data-risk="very-high" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-very-high" style="width:100%"></div></div>
+            <div class="trait-header"><span class="trait-name">Intestinal Microbiota</span><span class="risk-badge risk-very-high">Very High</span></div>
+            <p class="trait-desc">Gut bacteria diversity profile. Very high genetic risk predicts lower microbiome diversity, significantly impacting digestion, immune function, mental health, and metabolic efficiency. Probiotic and prebiotic intervention is strongly advised.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 2.53</span><span class="trait-pop">100th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:72%"></div></div>
+            <div class="trait-header"><span class="trait-name">Blautia Abundance</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Beneficial gut bacterium associated with reduced inflammation and metabolic health. Medium genetic abundance suggests a moderate gut health baseline that can be significantly improved through diet and lifestyle.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.48</span><span class="trait-pop">72nd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:56%"></div></div>
+            <div class="trait-header"><span class="trait-name">Acetone Levels</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Indicator of fat-as-energy use (ketone metabolism). Medium genetic acetone levels suggest moderate ketogenic capacity â€” not highly optimized for fat-burning but manageable with dietary support.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.27</span><span class="trait-pop">56th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:52%"></div></div>
+            <div class="trait-header"><span class="trait-name">Adiponectin (BMI-adjusted)</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Metabolic hormone regulator produced by fat tissue. Medium adiponectin levels suggest average insulin sensitivity and metabolic regulation â€” diet quality and exercise can meaningfully improve this.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.21</span><span class="trait-pop">52nd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:36%"></div></div>
+            <div class="trait-header"><span class="trait-name">Insulin Levels (weight-adjusted)</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Blood sugar regulation marker. Medium genetic insulin levels indicate an average predisposition to insulin sensitivity â€” favorable compared to high risk but still warrants mindful carbohydrate management.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.09</span><span class="trait-pop">36th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:37%"></div></div>
+            <div class="trait-header"><span class="trait-name">Energy Expenditure (24h)</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Daily caloric burn rate. Medium genetic energy expenditure suggests an average metabolic rate â€” not a natural advantage or disadvantage, but highly modifiable through exercise type and frequency.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.11</span><span class="trait-pop">37th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="metabolic">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:36%"></div></div>
+            <div class="trait-header"><span class="trait-name">Resting Metabolic Rate</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Baseline caloric expenditure at rest. Medium RMR suggests a typical metabolic baseline â€” neither a fast nor slow metabolism genetically. Muscle mass maintenance through resistance training is your most effective lever.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.08</span><span class="trait-pop">36th percentile</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VITAMINS -->
+      <div id="view-vitamins" class="view">
+        <div class="view-intro">Vitamin and micronutrient traits reflect genetic predisposition for absorption, transport, and utilization of essential cofactors, minerals, and vitamins.</div>
+        <div class="traits-grid">
+          <div class="trait-card" data-risk="high" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:83%"></div></div>
+            <div class="trait-header"><span class="trait-name">Coenzyme Q10 Levels</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Cellular energy antioxidant vital for mitochondrial function. High genetic CoQ10 predicts elevated endogenous production, a generally protective trait â€” though statin users should monitor levels carefully.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.76</span><span class="trait-pop">83rd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:82%"></div></div>
+            <div class="trait-header"><span class="trait-name">Blood Molybdenum</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Trace mineral for enzyme function, particularly xanthine oxidase and sulfite oxidase. High levels may require monitoring as excess molybdenum can interfere with copper absorption in some individuals.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.74</span><span class="trait-pop">82nd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:64%"></div></div>
+            <div class="trait-header"><span class="trait-name">Blood Manganese</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Antioxidant enzyme cofactor for SOD2, a key mitochondrial antioxidant. Medium genetic manganese indicates average cellular antioxidant capacity â€” whole grains, nuts, and legumes can optimize this.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.39</span><span class="trait-pop">64th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:36%"></div></div>
+            <div class="trait-header"><span class="trait-name">5-Formyltetrahydrofolate (Folate)</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Active form of vitamin B9 essential for DNA synthesis and homocysteine regulation. Medium genetic folate metabolism warrants monitoring, especially for pregnancy planning or cardiovascular risk management.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.09</span><span class="trait-pop">36th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:40%"></div></div>
+            <div class="trait-header"><span class="trait-name">Vitamin D Binding Protein</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Vitamin D transport protein affecting bioavailability of circulating vitamin D. Medium binding protein levels suggest average vitamin D delivery â€” supplementation efficacy should be assessed with serum 25-OH-D testing.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.13</span><span class="trait-pop">40th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:39%"></div></div>
+            <div class="trait-header"><span class="trait-name">Low Vitamin D Risk</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Bone health and immune function marker. Medium genetic predisposition to vitamin D deficiency suggests supplementation is advisable, particularly in regions with limited sun exposure like Northern Europe.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.12</span><span class="trait-pop">39th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="vitamins">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:35%"></div></div>
+            <div class="trait-header"><span class="trait-name">Blood Transferrin</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Iron transport protein that moves iron from intestinal absorption to sites of use. Medium genetic transferrin suggests adequate iron transport capacity â€” monitor with serum ferritin if fatigue or anemia symptoms arise.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.06</span><span class="trait-pop">35th percentile</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDIO -->
+      <div id="view-cardio" class="view">
+        <div class="view-intro">Cardiovascular marker traits reflect genetic predisposition for lipoprotein metabolism, cholesterol transport, and inflammatory cardiovascular risk factors.</div>
+        <div class="traits-grid">
+          <div class="trait-card" data-risk="high" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:87%"></div></div>
+            <div class="trait-header"><span class="trait-name">Large Lipoprotein Phospholipids</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Lipid transport particles carrying phospholipids. Elevated levels in large lipoproteins indicate high lipid cargo capacity that may contribute to arterial plaque formation over time.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.88</span><span class="trait-pop">87th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:85%"></div></div>
+            <div class="trait-header"><span class="trait-name">Phospholipids in Large VLDL</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Very low-density lipoprotein phospholipid content. High VLDL phospholipids signal elevated triglyceride-rich lipoprotein circulation, a significant independent cardiovascular risk factor.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.84</span><span class="trait-pop">85th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:83%"></div></div>
+            <div class="trait-header"><span class="trait-name">Total Lipids in Large VLDL</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Circulating fat in large VLDL particles. Total lipid content in large VLDL is a powerful predictor of cardiovascular events â€” reducing refined carbohydrates and alcohol intake is the primary dietary intervention.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.79</span><span class="trait-pop">83rd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:76%"></div></div>
+            <div class="trait-header"><span class="trait-name">Free Cholesterol in VLDL (post-meal)</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Post-prandial cholesterol load within VLDL particles. Elevated post-meal VLDL cholesterol suggests impaired lipid clearance after eating â€” low glycaemic index meals and timed eating windows may help.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.65</span><span class="trait-pop">76th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="high" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:76%"></div></div>
+            <div class="trait-header"><span class="trait-name">Phospholipid:Total Lipid Ratio (VLDL)</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Lipoprotein composition ratio indicating structural quality of VLDL particles. A high ratio may reflect VLDL particles that are more atherogenic due to their specific lipid composition.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.65</span><span class="trait-pop">76th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:47%"></div></div>
+            <div class="trait-header"><span class="trait-name">Postprandial Cholesterol (Large LP)</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">After-meal lipid response in large lipoproteins. Medium post-prandial cholesterol response suggests moderate lipid metabolism efficiency post-meal â€” portion control and meal composition matter significantly.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.17</span><span class="trait-pop">47th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="cardio">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:40%"></div></div>
+            <div class="trait-header"><span class="trait-name">Lipoprotein-associated PLA2</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Inflammatory cardiovascular enzyme that generates pro-inflammatory lipid mediators within arterial walls. Medium genetic PLA2 activity requires monitoring, especially in combination with your elevated VLDL markers.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.13</span><span class="trait-pop">40th percentile</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROTEIN -->
+      <div id="view-protein" class="view">
+        <div class="view-intro">Protein building block traits reflect genetic predisposition for amino acid metabolism, peptide digestion, and the production of important neurotransmitter precursors.</div>
+        <div class="traits-grid">
+          <div class="trait-card" data-risk="high" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-high" style="width:79%"></div></div>
+            <div class="trait-header"><span class="trait-name">N-Delta-Acetylornithine</span><span class="risk-badge risk-high">High</span></div>
+            <p class="trait-desc">Amino acid metabolite in the urea cycle and polyamine biosynthesis pathway. High genetic levels may reflect elevated ornithine metabolism, potentially affecting arginine availability and nitric oxide production.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.69</span><span class="trait-pop">79th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:63%"></div></div>
+            <div class="trait-header"><span class="trait-name">Beta-Aminoisobutyric Acids</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Cognitive and stress modulator produced by thymine catabolism. Medium levels suggest an average brain-derived neuroprotective amino acid profile â€” regular aerobic exercise significantly boosts this metabolite.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.37</span><span class="trait-pop">63rd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:59%"></div></div>
+            <div class="trait-header"><span class="trait-name">Glutamine Levels</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Immune and gut health amino acid that fuels intestinal enterocytes and immune cells. Medium genetic glutamine predicts adequate but not optimal gut barrier support â€” supplementation may benefit during high-stress periods.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.31</span><span class="trait-pop">59th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="low" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-low" style="width:36%"></div></div>
+            <div class="trait-header"><span class="trait-name">Citrulline Levels</span><span class="risk-badge risk-low">Low</span></div>
+            <p class="trait-desc">Nitric oxide and vascular health amino acid. Low genetic citrulline indicates reduced endogenous nitric oxide pathway activity â€” watermelon, arginine-rich foods, or direct citrulline supplementation may improve vascular function.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 0.89</span><span class="trait-pop">36th percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="medium" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-medium" style="width:42%"></div></div>
+            <div class="trait-header"><span class="trait-name">Threonine Levels</span><span class="risk-badge risk-medium">Medium</span></div>
+            <p class="trait-desc">Essential amino acid for protein synthesis and immune function. Medium threonine levels indicate adequate availability â€” animal proteins, lentils, and quinoa are strong dietary sources to maintain this level.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 1.14</span><span class="trait-pop">42nd percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="low" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-low" style="width:41%"></div></div>
+            <div class="trait-header"><span class="trait-name">Beta-Ala-His Dipeptidase</span><span class="risk-badge risk-low">Low</span></div>
+            <p class="trait-desc">Peptide digestion enzyme that breaks down carnosine and anserine. Low genetic enzyme activity means dietary carnosine is preserved longer â€” this is beneficial for muscle buffering capacity and exercise performance.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 0.92</span><span class="trait-pop">41st percentile</span></div>
+          </div>
+          <div class="trait-card" data-risk="low" data-category="protein">
+            <div class="trait-risk-strip"><div class="risk-fill risk-low" style="width:29%"></div></div>
+            <div class="trait-header"><span class="trait-name">N-Acetyltryptophan</span><span class="risk-badge risk-low">Low</span></div>
+            <p class="trait-desc">Tryptophan metabolite affecting mood, sleep quality, and serotonin synthesis. Low genetic N-acetyltryptophan may reflect efficient tryptophan conversion â€” adequate dietary tryptophan from turkey, eggs, and dairy supports this pathway.</p>
+            <div class="trait-footer"><span class="trait-prs">PRS: 0.81</span><span class="trait-pop">29th percentile</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECOMMENDATIONS -->
+      <div id="view-recommendations" class="view">
+        <div class="recs-layout">
+          <div class="rec-card rec-urgent">
+            <div class="rec-priority-label">ðŸš¨ Critical Priority</div>
+            <h3>Gut Microbiome Restoration</h3>
+            <p>Your Very High genetic risk for low Intestinal Microbiota diversity is the most impactful area to address. Gut diversity affects nutrient absorption, immune function, mental health, and metabolic efficiency.</p>
+            <ul class="rec-list">
+              <li>Take a multi-strain probiotic (Lactobacillus + Bifidobacterium) daily with breakfast</li>
+              <li>Consume 30+ different plant foods per week to maximize prebiotic diversity</li>
+              <li>Include fermented foods daily: yogurt, kefir, kimchi, or sauerkraut</li>
+              <li>Avoid unnecessary antibiotics and discuss alternatives with your physician</li>
+            </ul>
+            <div class="rec-genes">Related Variants: FUT2 rs601338 Â· LACTASE rs4988235 Â· NOD2 rs2066844</div>
+          </div>
+          <div class="rec-card rec-high">
+            <div class="rec-priority-label">âš ï¸ High Priority</div>
+            <h3>Cardiovascular Lipid Management</h3>
+            <p>Five High-risk cardiovascular markers including VLDL phospholipids and total lipids require active dietary management. These compound risk when combined with your elevated fatty acid profile.</p>
+            <ul class="rec-list">
+              <li>Reduce saturated fat intake to &lt;7% of total calories; replace with MUFA and PUFA</li>
+              <li>Eliminate refined carbohydrates and added sugars to reduce VLDL production</li>
+              <li>Add 2â€“4g EPA+DHA omega-3 daily to counterbalance high phospholipid markers</li>
+              <li>Request a full NMR lipid panel annually to monitor particle size and number</li>
+            </ul>
+            <div class="rec-genes">Related Variants: APOE rs429358 Â· PCSK9 rs562556 Â· LPL rs328</div>
+          </div>
+          <div class="rec-card rec-medium">
+            <div class="rec-priority-label">ðŸ“‹ Moderate Priority</div>
+            <h3>Fatty Acid Balance Protocol</h3>
+            <p>Very High Diacylglycerol and Phosphatidylcholine alongside elevated Linoleic and MUFA levels call for a targeted approach to lipid balance and anti-inflammatory eating.</p>
+            <ul class="rec-list">
+              <li>Follow an anti-inflammatory dietary pattern (Mediterranean or MIND diet)</li>
+              <li>Target an omega-6 to omega-3 ratio below 4:1 (typical Western diet is 15:1)</li>
+              <li>Prioritize fatty fish (salmon, sardines, mackerel) 3x per week</li>
+              <li>Use olive oil as primary cooking fat; minimize vegetable seed oils high in LA</li>
+            </ul>
+            <div class="rec-genes">Related Variants: FADS1 rs174546 Â· FADS2 rs1535 Â· ELOVL2 rs953413</div>
+          </div>
+          <div class="rec-card rec-low">
+            <div class="rec-priority-label">âœ… Maintenance</div>
+            <h3>Leverage Your Protective Strengths</h3>
+            <p>Your low Beta-Ala-His Dipeptidase is beneficial for muscle buffering, and medium metabolic markers give you a modifiable metabolic baseline. Strategic interventions amplify these advantages.</p>
+            <ul class="rec-list">
+              <li>Consider beta-alanine supplementation (3.2g/day) to maximally exploit your carnosine advantage</li>
+              <li>High-intensity interval training 2â€“3x weekly optimizes your medium metabolic rate</li>
+              <li>Track vitamin D status seasonally and supplement to maintain 50â€“80 ng/mL</li>
+              <li>Maintain adequate dietary folate through leafy greens, legumes, and fortified foods</li>
+            </ul>
+            <div class="rec-genes">Related Variants: CNDP1 rs2346061 Â· VDR rs2228570 Â· MTHFR rs1801133</div>
+          </div>
+        </div>
+        <div class="skin-plan-cta">
+          <div>
+            <h3>Build Your Nutrition Plan</h3>
+            <p>Our genomics team can create a fully customized dietary protocol, supplement stack, and metabolic monitoring schedule based on your unique genetic nutrition profile.</p>
+          </div>
+          <button class="btn-primary-lg">Improve My Nutrition Plan</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="trait-modal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">âœ•</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="nutrition.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
