@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const PROFILE_CSS = `
@@ -121,6 +121,111 @@ body {
   position: relative;
 }
 .avatar-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar-circle { cursor: pointer; }
+.avatar-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  width: 210px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(247,243,238,0.98));
+  border: 1px solid rgba(201, 184, 161, 0.42);
+  border-radius: 20px;
+  box-shadow: 0 16px 38px rgba(30,58,47,0.16);
+  backdrop-filter: blur(12px);
+  z-index: 50;
+}
+.avatar-menu::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  width: 14px;
+  height: 14px;
+  background: rgba(255,255,255,0.95);
+  border-left: 1px solid rgba(201, 184, 161, 0.42);
+  border-top: 1px solid rgba(201, 184, 161, 0.42);
+  transform: rotate(45deg);
+}
+.avatar-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.avatar-menu-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: rgba(107,174,214,0.14);
+  color: var(--sky);
+}
+.avatar-menu-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 2px;
+}
+.avatar-menu-subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+.avatar-menu-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(196,177,153,0.55);
+  color: var(--forest);
+  font-size: 13px;
+  padding: 11px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: transform .18s, background .18s, border-color .18s;
+  align-items: center;
+}
+.avatar-menu-item:not(:last-child) { margin-bottom: 8px; }
+.avatar-menu-item:hover {
+  background: #fff;
+  border-color: rgba(123,158,135,0.35);
+  transform: translateY(-1px);
+}
+.avatar-menu-item-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: rgba(123,158,135,0.1);
+  color: var(--sage-d);
+}
+.avatar-menu-item-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.avatar-menu-item-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--forest);
+}
+.avatar-menu-item-note {
+  font-size: 11px;
+  color: var(--muted);
+}
+.avatar-menu-item-chevron {
+  font-size: 16px;
+  color: var(--muted-l);
+}
+.avatar-menu-item:focus-visible {
+  outline: 2px solid rgba(107,174,214,0.6);
+  outline-offset: 2px;
+}
 .av-fallback {
   display: flex;
   position: absolute;
@@ -511,6 +616,8 @@ export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("main");
   const [settings, setSettings] = useState(INITIAL_SETTINGS);
   const [userId, setUserId] = useState("USR-USER0001");
+  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
+  const avatarRef = useRef(null);
 
   useEffect(() => {
     if (document.getElementById("profile-page-styles")) return;
@@ -520,6 +627,17 @@ export default function ProfilePage() {
     document.head.appendChild(style);
     return () => document.getElementById("profile-page-styles")?.remove();
   }, []);
+
+  useEffect(() => {
+    if (!showAvatarMenu) return;
+    const handleOutsideClick = (event) => {
+      if (avatarRef.current && !avatarRef.current.contains(event.target)) {
+        setShowAvatarMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [showAvatarMenu]);
 
   useEffect(() => {
     setUserId(sessionStorage.getItem("userId") || "USR-USER0001");
@@ -537,12 +655,61 @@ export default function ProfilePage() {
       <div className="profile-wrap">
         <div className="identity-row">
           <div className="identity-left">
-            <div className="avatar-wrap">
-              <div className="avatar-circle">
+            <div className="avatar-wrap" ref={avatarRef}>
+              <div className="avatar-circle" onClick={() => setShowAvatarMenu((value) => !value)}>
                 <img src="/images/avatarpic.jpg" alt="Profile" className="profilepic" />
                 <div className="av-fallback">AL</div>
               </div>
               <span className="av-online"></span>
+              {showAvatarMenu ? (
+                <div className="avatar-menu">
+                  <div className="avatar-menu-header">
+                    <div className="avatar-menu-header-icon">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2"/></svg>
+                    </div>
+                    <div>
+                      <div className="avatar-menu-title">Quick actions</div>
+                      <div className="avatar-menu-subtitle">Open your activity and account controls</div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="avatar-menu-item"
+                    onClick={() => {
+                      setActiveTab("history");
+                      setShowAvatarMenu(false);
+                    }}
+                  >
+                    <span className="avatar-menu-item-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 8v5l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><path d="M21 12a9 9 0 11-9-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                    <span className="avatar-menu-item-copy">
+                      <span className="avatar-menu-item-label">History</span>
+                      <span className="avatar-menu-item-note">Review recent activity</span>
+                    </span>
+                    <span className="avatar-menu-item-chevron">›</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    className="avatar-menu-item"
+                    onClick={() => {
+                      setActiveTab("settings");
+                      setShowAvatarMenu(false);
+                    }}
+                  >
+                    <span className="avatar-menu-item-icon">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 15.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" stroke="currentColor" strokeWidth="2"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c0 .55.22 1.08.61 1.47z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                    </span>
+                    <span className="avatar-menu-item-copy">
+                      <span className="avatar-menu-item-label">Settings</span>
+                      <span className="avatar-menu-item-note">Manage notifications and privacy</span>
+                    </span>
+                    <span className="avatar-menu-item-chevron">›</span>
+                  </button>
+                </div>
+              ) : null}
             </div>
             <div className="name-block">
               <div className="name-row">
@@ -566,8 +733,6 @@ export default function ProfilePage() {
 
         <div className="ptabs">
           <button className={`ptab${activeTab === "main" ? " active" : ""}`} type="button" onClick={() => setActiveTab("main")}>Reports &amp; Overview <span className="ptab-pill">4</span></button>
-          <button className={`ptab${activeTab === "history" ? " active" : ""}`} type="button" onClick={() => setActiveTab("history")}>History</button>
-          <button className={`ptab${activeTab === "settings" ? " active" : ""}`} type="button" onClick={() => setActiveTab("settings")}>Settings</button>
         </div>
 
         <div className={`tab-panel${activeTab === "main" ? " active" : ""}`} id="tab-main">
