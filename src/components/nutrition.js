@@ -181,7 +181,6 @@ function toggleDist2(row) {
 // RC ACCORDION
 // ============================================================
 const rcItems = [];
-let rcAutoTimer = null;
 
 function initRcItems() {
   const items = Array.from(document.querySelectorAll('.rc-item'));
@@ -211,11 +210,6 @@ function rcClose(item) {
 }
 
 let rcIndex = 0;
-function rcAutoAdvance() {
-  rcItems.forEach(el => rcClose(el));
-  rcIndex = (rcIndex + 1) % rcItems.length;
-  rcOpen(rcItems[rcIndex]);
-}
 
 function toggleRcItem(item) {
   const isOpen = item.classList.contains('rc-expanded');
@@ -223,11 +217,6 @@ function toggleRcItem(item) {
   if (!isOpen) {
     rcOpen(item);
     rcIndex = rcItems.indexOf(item);
-    clearInterval(rcAutoTimer);
-    rcAutoTimer = setInterval(rcAutoAdvance, 3000);
-  } else {
-    clearInterval(rcAutoTimer);
-    rcAutoTimer = null;
   }
 }
 
