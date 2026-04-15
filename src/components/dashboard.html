@@ -1064,7 +1064,6 @@ function toggleDist2(row) {
 /* â”€â”€ RC accordion smooth animation setup â”€â”€ */
 const rcItems = Array.from(document.querySelectorAll('.rc-item'));
 let rcIndex = 0;
-let rcAutoTimer = null;
 
 // Init: close all items on load
 document.querySelectorAll('.rc-expand-body').forEach(body => {
@@ -1098,26 +1097,13 @@ function rcClose(item) {
   chevron.style.transform = '';
 }
 
-function rcAutoAdvance() {
-  rcItems.forEach(el => rcClose(el));
-  rcIndex = (rcIndex + 1) % rcItems.length;
-  rcOpen(rcItems[rcIndex]);
-}
-
 function toggleRcItem(item) {
   const isOpen = item.classList.contains('rc-expanded');
   rcItems.forEach(el => rcClose(el));
 
   if (!isOpen) {
-    // Open this item and start/resume auto-advance from here
     rcOpen(item);
     rcIndex = rcItems.indexOf(item);
-    clearInterval(rcAutoTimer);
-    rcAutoTimer = setInterval(rcAutoAdvance, 3000);
-  } else {
-    // User closed â€” stop auto-advance entirely
-    clearInterval(rcAutoTimer);
-    rcAutoTimer = null;
   }
 }
 </script>
