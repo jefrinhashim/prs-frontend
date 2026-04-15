@@ -271,8 +271,8 @@ body {
   border-radius: 100px;
   box-shadow: 0 2px 8px rgba(30,58,47,0.25);
 }
-.prole { font-size: 13px; color: var(--muted); margin-bottom: -8px; }
-.pid { font-size: 11px; color: var(--muted-l); margin-bottom: 14px; }
+.prole { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+.pid { font-size: 11px; color: var(--muted-l); margin-top: 4px; margin-bottom: 14px; }
 .pactions { display: flex; gap: 9px; flex-wrap: wrap; }
 .btn-dark {
   display: inline-flex;
