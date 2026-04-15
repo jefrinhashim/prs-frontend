@@ -257,6 +257,7 @@ body {
   letter-spacing: -0.3px;
   line-height: 1.2;
 }
+  .
 .pro-badge {
   display: inline-flex;
   align-items: center;
@@ -270,7 +271,7 @@ body {
   border-radius: 100px;
   box-shadow: 0 2px 8px rgba(30,58,47,0.25);
 }
-.prole { font-size: 13px; color: var(--muted); margin-bottom: 2px; }
+.prole { font-size: 13px; color: var(--muted); margin-bottom: -8px; }
 .pid { font-size: 11px; color: var(--muted-l); margin-bottom: 14px; }
 .pactions { display: flex; gap: 9px; flex-wrap: wrap; }
 .btn-dark {
@@ -721,11 +722,8 @@ export default function ProfilePage() {
               <p className="prole">Genetic Skin Health Report</p>
               <p className="pid mono" id="userId">{userId}</p>
               <div className="pactions">
-                <button className="btn-dark" type="button" onClick={() => navigate("/reports/skin")}>..</button>
-                <button className="btn-ghost" type="button">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M16 12l-4 4m0 0l-4-4m4 4V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  ..
-                </button>
+                
+                
               </div>
             </div>
           </div>

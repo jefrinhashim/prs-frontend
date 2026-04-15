@@ -8,7 +8,7 @@
  *   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
  */
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    GLOBAL STYLES injected once into <head>
@@ -47,7 +47,6 @@ const CSS = `
     border-bottom: 1px solid var(--line);
     transition: all .3s ease;
   }
-  .gs-nav.scrolled { padding: 0.9rem 8vw; box-shadow: 0 4px 24px rgba(0,0,0,0.07); }
   .gs-nav.nav-transparent {
     background: transparent; backdrop-filter: none;
     box-shadow: none; border-bottom-color: transparent;
@@ -513,43 +512,17 @@ const CSS = `
     width: 100%;
     min-height: inherit;
     height: 100%;
-    background:
-      radial-gradient(circle at top, rgba(255,255,255,0.18), transparent 48%),
-      linear-gradient(160deg, #25312d 0%, #161d1a 100%);
-  }
-  .category-sequence-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-  .category-sequence-canvas.is-ready { opacity: 1; }
-  .category-sequence-loading {
-    position: absolute;
-    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    background: linear-gradient(180deg, rgba(9,14,12,0.15), rgba(9,14,12,0.45));
+    overflow: hidden;
+    background: linear-gradient(160deg, #25312d 0%, #161d1a 100%);
   }
-  .category-sequence-ui {
-    position: absolute;
-    left: 1.35rem;
-    right: 1.35rem;
-    bottom: 1.35rem;
-    z-index: 2;
-    display: grid;
-    gap: 0.55rem;
-    padding: 1rem 1.05rem;
-    border-radius: 18px;
-    background: linear-gradient(180deg, rgba(10,15,13,0.45), rgba(10,15,13,0.72));
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
+  .category-sequence-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .category-sequence-meta {
     display: flex;
@@ -998,16 +971,11 @@ function drawCoverImageToCanvas(canvas, image) {
   context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
 }
 function Nav({ currentPage, showPage }) {
-  const [scrolled, setScrolled] = useState(false);
   const [transparent, setTransparent] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
-      const hero = document.querySelector(".hero");
-      const threshold = hero ? Math.max(hero.offsetHeight - 90, 40) : 40;
-      setScrolled(window.scrollY > threshold);
-
       const video = document.querySelector(".prs-cinema-video");
       if (video) {
         const rect = video.getBoundingClientRect();
@@ -1034,7 +1002,7 @@ function Nav({ currentPage, showPage }) {
 
   return (
     <>
-      <nav className={`gs-nav${scrolled ? " scrolled" : ""}${transparent ? " nav-transparent" : ""}`}>
+      <nav className={`gs-nav${transparent ? " nav-transparent" : ""}`}>
         <span className="nav-logo" onClick={() => nav("dashboard")}>Polygenic <span>RiskScore</span></span>
         <ul className="nav-links">
           <li>
@@ -1704,7 +1672,7 @@ function TraitDetailPage({ showPage }) {
 function ComparisonPage({ showPage, comparisonCategory = "health" }) {
   useReveal();
 
-  const tabs = [
+  const tabs = useMemo(() => [
     {
       key: "covers",
       label: "What It Covers",
@@ -1761,7 +1729,7 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
       asideTitle: "Big Picture",
       asideBody: comparisonCategory === "physical" ? "This category adds context to how your body presents, adapts, and responds." : comparisonCategory === "nutrition" ? "This category turns repeated daily food choices into a more informed strategy." : comparisonCategory === "sports" ? "This category helps turn performance genetics into a clearer long-term training strategy." : "This category matters most because it connects DNA insight with tangible decisions you can make before problems intensify.",
     },
-  ];
+  ], [comparisonCategory]);
 
   const categoryDetailRef = useRef(null);
   const sequenceCanvasRef = useRef(null);
@@ -1900,7 +1868,7 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
       window.clearInterval(progressTimer);
       window.clearTimeout(rotateTimer);
     };
-  }, [activeIndex, activeTab, isPaused, tabs]);
+  }, [activeIndex, isPaused, tabs]);
 
   const circumference = 2 * Math.PI * 25;
   const dashOffset = circumference * (1 - progress);
@@ -1914,27 +1882,11 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
               <div className="section-tag">Category Detail</div>
               <h1>{comparisonCategory === "physical" ? <>Physical Traits <em>Insights</em></> : comparisonCategory === "nutrition" ? <>Nutrition <em>Insights</em></> : comparisonCategory === "sports" ? <>Sports <em>Insights</em></> : <>Health <em>Insights</em></>}</h1>
               <p>{comparisonCategory === "physical" ? "This category explains how your genetics may influence visible features, body composition tendencies, muscle response, and environmental sensitivity such as UV exposure. It helps translate phenotype-related markers into practical expectations." : comparisonCategory === "nutrition" ? "This category brings together genetic signals linked to metabolism, appetite regulation, nutrient handling, and how your body may respond to fats, carbohydrates, and key micronutrients. It is designed to support more personalised food decisions." : comparisonCategory === "sports" ? "This category highlights genetics linked to performance style, recovery rate, endurance, strength response, and how your body may adapt to different training demands. It helps position athletic potential as a planning tool rather than a fixed label." : "This category brings together your genetics for inflammatory skin disease, long-term dermatological risk, and protective barrier markers. It is designed to help you understand where your highest clinical attention may be needed and which findings are better suited for prevention rather than concern."}</p>
-              <div className="category-copy-note">Scroll to scrub the sequence</div>
+              <div className="category-copy-note">Static garden view</div>
             </div>
             <div className="category-panel">
               <div className="category-sequence-shell">
-                <canvas
-                  ref={sequenceCanvasRef}
-                  className={`category-sequence-canvas${sequenceReady ? " is-ready" : ""}`}
-                  role="img"
-                  aria-label={`${sequenceTitle} scroll sequence`}
-                />
-                {!sequenceReady ? <div className="category-sequence-loading">Loading sequence</div> : null}
-                <div className="category-sequence-ui">
-                  <div className="category-sequence-meta">
-                    <strong>{sequenceTitle}</strong>
-                    <span>{String(Math.min(sequenceFrame + 1, sequenceFrameTotal)).padStart(2, "0")} / {String(sequenceFrameTotal).padStart(2, "0")}</span>
-                  </div>
-                  <div className="category-sequence-progress">
-                    <span style={{ transform: `scaleX(${sequenceFrameTotal > 0 ? (sequenceFrame + 1) / sequenceFrameTotal : 0})` }}></span>
-                  </div>
-                  <p>Scroll through this section to advance the 30 FPS image sequence frame by frame.</p>
-                </div>
+                <img src="/images/garden.jpg" alt="Garden" className="category-sequence-image" />
               </div>
             </div>
           </div>
