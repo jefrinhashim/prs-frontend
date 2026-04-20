@@ -22,13 +22,13 @@ export const heroSlides = [
   },
   {
     tag: "Athletic Performance",
-    title: "Train smarter, not harder",
+    title: "Make hard training smarter",
     body:
       "Use your genomic baseline to understand recovery, injury predisposition, and performance traits.",
   },
   {
     tag: "Nutrition and Diet",
-    title: "Eat for your genetic type",
+    title: "Eat according to your genes",
     body:
       "See how your DNA affects metabolic efficiency, nutrient transport, and lipid handling.",
   },
@@ -39,7 +39,7 @@ export const categories = [
     title: "Health",
     subtitle: "Genetic risk analysis",
     description:
-      "Skin health insights covering inflammation, disease susceptibility, and protective markers.",
+      "Health insights linking inherited risk, protective biology, and early prevention opportunities across clinically relevant traits.",
     href: "/reports/skin",
     accent: "from-rose-200 via-orange-100 to-white",
   },

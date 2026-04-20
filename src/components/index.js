@@ -360,7 +360,7 @@ function initCharts() {
     });
   }
 
-  // Category Risk Profile — SVG ring chart
+  // Category Risk Profile ï¿½ SVG ring chart
   (function initRingChart() {
     const ringData = [
       { label: 'Dermatological', value: 15, color: '#C1634A' },
@@ -485,49 +485,57 @@ const traitData = {
     name: 'Mosquito Bite Sensitivity', category: 'Allergies', risk: 'high',
     prs: '1.88', percentile: '81st',
     description: 'IL-4 and IgE pathway variants indicate an elevated immune response to mosquito salivary antigens, predicting increased whealing and pruritus following bites. This reflects a Th2-skewed immune phenotype with heightened mast cell degranulation.',  
-    genes: 'IL4 · FCER1A rs2298805 · IL13 rs1800925'
+    prs_effect_direction: '',
+    genes: 'IL4 ï¿½ FCER1A rs2298805 ï¿½ IL13 rs1800925'
   },
   keratinocyte: {
     name: 'Keratinocyte Cancer', category: 'Dermatological Diseases', risk: 'very-high',
     prs: '2.31', percentile: '92nd',
     description: 'Multiple GWAS risk loci in keratinocyte-differentiation genes converge on very high lifetime risk for squamous cell carcinoma of the skin. This finding warrants immediate clinical attention and regular dermatological monitoring.',   
-    genes: 'KRT5 rs11170164 · TP53 rs1042522 · CDKN2A ?16bp'
+    prs_effect_direction: '',
+    genes: 'KRT5 rs11170164 ï¿½ TP53 rs1042522 ï¿½ CDKN2A ?16bp'
   },
   nonmelanoma: {
     name: 'Non-Melanoma Skin Cancer', category: 'Dermatological Diseases', risk: 'very-high',
     prs: '2.47', percentile: '95th',
     description: 'MC1R, PTCH1, and TP53 variants converge to significantly elevate squamous and basal cell carcinoma risk. Your PRS places you in the top 5% of the population for this trait.',   
-    genes: 'MC1R p.R160W · PTCH1 rs357564 · OCA2 rs1800407'
+    prs_effect_direction: 'harmful',
+    genes: 'MC1R p.R160W ï¿½ PTCH1 rs357564 ï¿½ OCA2 rs1800407'
   },
   psoriasis: {
     name: 'Psoriasis', category: 'Dermatological Diseases', risk: 'high',
     prs: '1.94', percentile: '85th',
     description: 'HLA-C*06:02 and IL-23/IL-17 pathway variants significantly increase psoriasis susceptibility. This combination is the most important genetic risk factor for plaque psoriasis.',  
-    genes: 'HLA-C*06:02 · IL23R rs11209026 · CARD14 rs11652075'
+    prs_effect_direction: 'harmful',
+    genes: 'HLA-C*06:02 ï¿½ IL23R rs11209026 ï¿½ CARD14 rs11652075'
   },
   rosacea: {
     name: 'Rosacea', category: 'Dermatological Diseases', risk: 'high',
     prs: '1.78', percentile: '80th',
     description: 'Cathelicidin (LL-37) and inflammatory vascular response gene variants show elevated rosacea predisposition. VEGF-related and TLR2 variants amplify facial inflammatory responses to triggers.',
-    genes: 'BTNL2 rs2395185 · HLA-DRA rs763802 · TLR2 rs3804100'
+    prs_effect_direction: 'harmful',
+    genes: 'BTNL2 rs2395185 ï¿½ HLA-DRA rs763802 ï¿½ TLR2 rs3804100'
   },
   kallikrein: {
     name: 'Kallikrein-7 Levels', category: 'Skin Health Markers', risk: 'high',
     prs: '1.82', percentile: '83rd',
     description: 'Kallikrein-7 (KLK7) is a serine protease critical for skin desquamation. Elevated genetic levels can over-digest the corneal layer, leading to barrier compromise, sensitivity, and inflammatory skin conditions.',  
-    genes: 'KLK7 promoter · SPINK5 rs2303064 · CST9 rs2070219'
+    prs_effect_direction: 'harmful',
+    genes: 'KLK7 promoter ï¿½ SPINK5 rs2303064 ï¿½ CST9 rs2070219'
   },
   ceramide: {
     name: 'Ceramide Levels', category: 'Skin Health Markers', risk: 'very-low',
     prs: '0.41', percentile: '10th',
     description: 'Ceramides are essential lipids that form the skin\'s waterproof barrier. Your CERS2 and SMPD1 variant profile predicts excellent ceramide synthesis, contributing to robust barrier function across your lifetime.',
-    genes: 'CERS2 rs267606587 · SMPD1 rs1050239 · ASAH1 rs6428711'
+    prs_effect_direction: 'harmful',
+    genes: 'CERS2 rs267606587 ï¿½ SMPD1 rs1050239 ï¿½ ASAH1 rs6428711'
   },
   sunburn: {
     name: 'Sunburn Sensitivity', category: 'Skin Aesthetics', risk: 'high',
     prs: '1.96', percentile: '86th',
     description: 'MC1R loss-of-function variants and minimal melanin buffering increase UV erythema response substantially. You are genetically predisposed to burn quickly and significantly in unprotected sun exposure.',  
-    genes: 'MC1R p.V60L · MC1R p.R151C · TYR rs1393350'
+    prs_effect_direction: '',
+    genes: 'MC1R p.V60L ï¿½ MC1R p.R151C ï¿½ TYR rs1393350'
   },
 };
 
@@ -555,6 +563,41 @@ function normalizePercentile(raw) {
   return raw.replace(/percentile/i, '').trim();
 }
 
+function formatPrsEffectDirection(raw) {
+  if (!raw) return '';
+  return String(raw)
+    .replace(/[_-]+/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase());
+}
+
+function ancestryRiskClass(level) {
+  return String(level).toLowerCase().replace(/\s+/g, '-');
+}
+
+function buildTraitAncestryTable(rows) {
+  if (!Array.isArray(rows) || !rows.length) return '';
+
+  return `
+    <div class="trait-ancestry-table">
+      <div class="trait-ancestry-head">
+        <span>Ancestry</span>
+        <span>Genetic Risk</span>
+      </div>
+      <div class="trait-ancestry-body">
+        ${rows.map(([ancestry, risk]) => `
+          <div class="trait-ancestry-row">
+            <span>${ancestry}</span>
+            <span class="trait-ancestry-risk">
+              <span>${risk}</span>
+              <i class="trait-ancestry-dot risk-${ancestryRiskClass(risk)}"></i>
+            </span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
 function hydrateTraitDataFromCards() {
   document.querySelectorAll('.trait-card').forEach(card => {
     const id = extractTraitIdFromCard(card);
@@ -566,6 +609,10 @@ function hydrateTraitDataFromCards() {
     const prs = (card.querySelector('.trait-prs')?.textContent || '').replace('PRS:', '').trim();
     const percentile = normalizePercentile(card.querySelector('.trait-pop')?.textContent || '');
     const description = card.querySelector('.trait-desc')?.textContent?.trim() || '';
+    const prs_effect_direction =
+      card.dataset.prsEffectDirection ||
+      card.querySelector('.trait-effect-value')?.textContent?.trim() ||
+      '';
 
     traitData[id] = {
       name,
@@ -574,8 +621,10 @@ function hydrateTraitDataFromCards() {
       prs,
       percentile,
       description,
+      prs_effect_direction,
       recs: ['Follow your dermatologist-guided routine and monitor symptoms over time.'],
-      genes: 'Not specified'
+      genes: 'Not specified',
+      ancestryProfile: traitAncestryProfiles[id] || []
     };
   });
 }
@@ -608,6 +657,24 @@ function renderTraitCardsFromData() {
     const descEl = card.querySelector('.trait-desc');
     if (descEl) descEl.textContent = d.description;
 
+    let effectEl = card.querySelector('.trait-effect-direction');
+    if (d.prs_effect_direction) {
+      if (!effectEl) {
+        effectEl = document.createElement('p');
+        effectEl.className = 'trait-effect-direction';
+        const footerEl = card.querySelector('.trait-footer');
+        if (footerEl) {
+          card.insertBefore(effectEl, footerEl);
+        } else {
+          card.appendChild(effectEl);
+        }
+      }
+
+      effectEl.innerHTML = `<span class="trait-effect-label">PRS Effect Direction:</span> <span class="trait-effect-value">${formatPrsEffectDirection(d.prs_effect_direction)}</span>`;
+    } else if (effectEl) {
+      effectEl.remove();
+    }
+
     const prsEl = card.querySelector('.trait-prs');
     if (prsEl) prsEl.textContent = `PRS: ${d.prs}`;
 
@@ -620,6 +687,7 @@ function showTrait(id) {
   const d = traitData[id];
   if (!d) return;
   const baseRecs = Array.isArray(d.recs) ? d.recs : [];
+  const ancestryTable = buildTraitAncestryTable(d.ancestryProfile);
   const extraRecs = [
     'Track flare-ups or skin changes weekly to identify long-term patterns..',
     'Pair active ingredients with barrier-repair products to improve tolerance.',
@@ -641,6 +709,7 @@ function showTrait(id) {
       </div>
     </div>
     <p class="modal-desc">${d.description}</p>
+    ${ancestryTable}
     <div class="modal-section-title">Personalized Recommendations</div>
     <div class="modal-recs">
       ${allRecs.map(r => `<div class="modal-rec-item"><div class="rec-dot"></div><span>${r}</span></div>`).join('')}

@@ -140,10 +140,11 @@ const CSS = `
   .hero h1 {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(3rem,5.5vw,5.2rem); font-weight: 300; line-height: 1.12;
-    letter-spacing: -0.01em; color: #fff; margin-bottom: 1.8rem;
+    letter-spacing: -0.01em; color: #fffdf8; margin-bottom: 1.8rem;
+    text-shadow: 0 1px 12px rgba(255,255,255,0.28);
   }
   .hero h1 em { font-style: italic; color: var(--accent2); }
-  .hero-desc { font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(255,255,255,0.75); max-width: 520px; margin-bottom: 2.8rem; }
+  .hero-desc { font-size: 1rem; font-weight: 300; line-height: 1.75; color: rgba(20,32,28,0.9); max-width: 520px; margin-bottom: 2.8rem; text-shadow: 0 1px 10px rgba(255,255,255,0.24); }
   .hero-btns { display: flex; gap: 1rem; align-items: center; }
   .hero-dots { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.6rem; z-index: 10; }
   .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: background .3s; }
@@ -159,15 +160,17 @@ const CSS = `
   .hero-slide.active .slide-overlay-text { opacity: 1; transform: translateY(0); }
   .slide-tag {
     display: inline-block; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent2); margin-bottom: 0.75rem;
-    border: 1px solid rgba(168,197,189,0.6); padding: 0.3rem 0.8rem;
+    color: #1f3c33; margin-bottom: 0.75rem;
+    border: 1px solid rgba(31,60,51,0.35); padding: 0.3rem 0.8rem;
+    background: rgba(255,255,255,0.36);
   }
   .slide-headline {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem,2.8vw,2.8rem); font-weight: 300; line-height: 1.18; color: #fff; margin-bottom: 0.8rem;
+    font-size: clamp(1.8rem,2.8vw,2.8rem); font-weight: 300; line-height: 1.18; color: #fffdf8; margin-bottom: 0.8rem;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.45);
   }
-  .slide-headline em { font-style: italic; color: var(--accent2); }
-  .slide-body { font-size: 0.82rem; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,0.72); }
+  .slide-headline em { font-style: italic; color: #f2c66d; }
+  .slide-body { font-size: 0.82rem; font-weight: 300; line-height: 1.7; color: rgba(20,32,28,0.88); text-shadow: 0 1px 10px rgba(255,255,255,0.2); }
 
   /* STATS STRIP */
   .stats-strip { background: var(--dark); display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid rgba(255,255,255,0.08); }
@@ -197,7 +200,7 @@ const CSS = `
   .about { background: var(--white); }
   .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
   .about-img-wrap { position: relative; aspect-ratio: 3/4; overflow: hidden; }
-  .hosiptalin { transform: scale(0.7); object-position: right; width: 100%; }
+  .about-feature-image { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
   .about-content { padding-right: 2rem; }
   .about-content h2 { margin-bottom: 1.5rem; }
   .about-content p { font-size: 0.95rem; font-weight: 300; line-height: 1.85; color: var(--mid); margin-bottom: 1.2rem; }
@@ -879,8 +882,8 @@ const HERO_SLIDES = [
   {
     bg: "url('/images/running.png')",
     tag: "Athletic Performance",
-    headline: ["Train Smarter,", <em key="e">Not Harder</em>],
-    body: "Your genetics reveal injury risk, recovery rate & muscle composition.",
+    headline: ["Make hard training", <><br key="br" /><em key="e">smarter</em></>],
+    body: "Your genetics help reveal recovery patterns, injury susceptibility, and how your body may respond to training load.",
   },
   {
     bg: "url('/images/happyfamily.jpg')",
@@ -889,10 +892,10 @@ const HERO_SLIDES = [
     body: "Understand inherited skin risks â€” for you and those you love.",
   },
   {
-    bg: "url('/images/running.png')",
+    bg: "url('/images/nutrition-slide.jpg')",
     tag: "Nutrition & Diet",
-    headline: ["Eat for Your", <><br key="br" /><em key="e">Genetic Type</em></>],
-    body: "Discover how your body metabolises fats, carbs & key nutrients.",
+    headline: ["Make the most", <><br key="br" /><em key="e">of your food</em></>],
+    body: "Discover how your body metabolises fats, carbohydrates, and key nutrients through your genetic profile.",
   },
 ];
 
@@ -1275,17 +1278,17 @@ function DashboardPage({ showPage }) {
       <section className="about" id="about-anchor">
         <div className="about-inner reveal">
           <div className="about-img-wrap">
-            <img src="/images/hosiptalin.jpg" className="hosiptalin" alt="Hospital" />
+            <img src="/images/dnasnitch.jpg" className="about-feature-image" alt="DNA and health analysis" />
           </div>
           <div className="about-content">
             <span className="section-tag">About Your Report</span>
-            <h2>Science of <em>Skin & Genetics</em></h2>
-            <p>Your skin is shaped by thousands of small DNA variations influencing how it looks, reacts, ages, and heals. No two people's genetic blueprint is the same.</p>
-            <p>GeneSkin uses PRS methodology to capture the combined effect of many variants at once, calculated from validated GWAS data and compared against 4 global population panels.</p>
+            <h2>How Genetics Helps <em>Explain Health</em></h2>
+            <p>Your report brings together thousands of small DNA differences that can influence risk, resilience, and how your body responds across health-related traits. The goal is not to label your future, but to give clearer context for prevention and everyday decisions.</p>
+            <p>GeneSkin uses polygenic risk scoring to estimate the combined effect of many variants at once, drawing on validated research and population reference data to make complex genetics easier to understand.</p>
             <div className="credentials">
-              <div className="credential">Conditions like eczema and psoriasis have strong genetic components PRS can identify early</div>
-              <div className="credential">Genetics explains why identical routines produce different results in different people</div>
-              <div className="credential">For informational purposes only â€” consult a clinician</div>
+              <div className="credential">DNA insights can help highlight where earlier screening or stronger prevention may be worthwhile</div>
+              <div className="credential">Genetics helps explain why similar habits can lead to different outcomes in different people</div>
+              <div className="credential">For informational purposes only - consult a clinician</div>
             </div>
           </div>
         </div>
@@ -1434,8 +1437,8 @@ function CategoriesPage({ showPage, setComparisonCategory }) {
     <div className="categories-page">
       <div className="categories-page-header reveal">
         <div className="section-tag">Report Coverage</div>
-        <h1>Explore <em>Categories</em></h1>
-        <p>Four areas of genetic analysis - each delivering personalised insights based on your DNA profile and polygenic risk scores.</p>
+        <h1>Explore How Your <em>DNA Affects Your Life</em></h1>
+        <p>Four areas of genetic analysis, each designed to show how inherited biology can shape health, nutrition, physical traits, and athletic performance.</p>
       </div>
 
       <div className="portfolio-grid">
@@ -1678,13 +1681,13 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
       label: "What It Covers",
       title: "What It Covers",
       body: [
-        comparisonCategory === "physical" ? "Physical traits cover inherited patterns related to pigmentation, body composition, muscle profile, and other phenotype-linked features that shape how your body may naturally present." : comparisonCategory === "nutrition" ? "Nutrition traits focus on how your body may process fats, carbohydrates, caffeine, vitamins, minerals, and appetite-related signals." : comparisonCategory === "sports" ? "Sports traits cover inherited patterns related to endurance capacity, strength response, muscle efficiency, recovery behavior, and tolerance for repeated training stress." : "Health traits focus on inherited tendencies related to eczema, psoriasis, rosacea, acne, skin cancer risk, and barrier instability markers that may influence flare frequency and severity.",
-        comparisonCategory === "physical" ? "This section helps connect those visible or structural traits so they feel less isolated and more useful in everyday routines." : comparisonCategory === "nutrition" ? "This section helps you read those markers as a connected system instead of isolated food facts." : comparisonCategory === "sports" ? "Instead of promising fixed outcomes, this section shows where your genetics may support stronger adaptation in some areas and greater support needs in others." : "Instead of treating every result as isolated, this section helps you understand how inflammatory response, pigmentation pathways, and repair biology can work together to shape your skin-health baseline.",
+        comparisonCategory === "physical" ? "Physical traits cover inherited patterns related to pigmentation, body composition, muscle profile, and other phenotype-linked features that shape how your body may naturally present." : comparisonCategory === "nutrition" ? "Nutrition traits focus on how your body may process fats, carbohydrates, caffeine, vitamins, minerals, and appetite-related signals." : comparisonCategory === "sports" ? "Sports traits cover inherited patterns related to endurance capacity, strength response, muscle efficiency, recovery behavior, and tolerance for repeated training stress." : "Health traits cover inherited tendencies related to disease risk, inflammatory behavior, protective biology, and clinically relevant markers that may shape prevention priorities over time.",
+        comparisonCategory === "physical" ? "This section helps connect those visible or structural traits so they feel less isolated and more useful in everyday routines." : comparisonCategory === "nutrition" ? "This section helps you read those markers as a connected system instead of isolated food facts." : comparisonCategory === "sports" ? "Instead of promising fixed outcomes, this section shows where your genetics may support stronger adaptation in some areas and greater support needs in others." : "Instead of treating every result as an isolated score, this section helps you see how multiple health-related signals can work together to guide screening, prevention, and smarter follow-up.",
       ],
-      meta: comparisonCategory === "physical" ? ["Body composition", "Pigmentation", "Phenotype markers"] : comparisonCategory === "nutrition" ? ["Metabolic response", "Micronutrients", "Appetite signals"] : comparisonCategory === "sports" ? ["Recovery profile", "Endurance response", "Strength adaptation"] : ["Inflammation markers", "Barrier resilience", "Dermatology risk"],
+      meta: comparisonCategory === "physical" ? ["Body composition", "Pigmentation", "Phenotype markers"] : comparisonCategory === "nutrition" ? ["Metabolic response", "Micronutrients", "Appetite signals"] : comparisonCategory === "sports" ? ["Recovery profile", "Endurance response", "Strength adaptation"] : ["Risk markers", "Protective factors", "Prevention context"],
       image: "/tabimages/sofasit.png",
       asideTitle: "Section Focus",
-      asideBody: comparisonCategory === "physical" ? "This tab frames the broader physical-traits category and shows which inherited tendencies are being summarized." : comparisonCategory === "nutrition" ? "This tab gives the broad context for how nutrition-related markers may work together." : comparisonCategory === "sports" ? "This tab outlines the broader sports category and the performance markers it includes." : "This tab gives the broadest overview of the health category and sets the context for the more specific tabs that follow.",
+      asideBody: comparisonCategory === "physical" ? "This tab frames the broader physical-traits category and shows which inherited tendencies are being summarized." : comparisonCategory === "nutrition" ? "This tab gives the broad context for how nutrition-related markers may work together." : comparisonCategory === "sports" ? "This tab outlines the broader sports category and the performance markers it includes." : "This tab gives the broadest overview of the health category and sets the context for the more specific findings that follow.",
     },
     {
       key: "use",
@@ -1881,12 +1884,12 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
             <div className="category-copy">
               <div className="section-tag">Category Detail</div>
               <h1>{comparisonCategory === "physical" ? <>Physical Traits <em>Insights</em></> : comparisonCategory === "nutrition" ? <>Nutrition <em>Insights</em></> : comparisonCategory === "sports" ? <>Sports <em>Insights</em></> : <>Health <em>Insights</em></>}</h1>
-              <p>{comparisonCategory === "physical" ? "This category explains how your genetics may influence visible features, body composition tendencies, muscle response, and environmental sensitivity such as UV exposure. It helps translate phenotype-related markers into practical expectations." : comparisonCategory === "nutrition" ? "This category brings together genetic signals linked to metabolism, appetite regulation, nutrient handling, and how your body may respond to fats, carbohydrates, and key micronutrients. It is designed to support more personalised food decisions." : comparisonCategory === "sports" ? "This category highlights genetics linked to performance style, recovery rate, endurance, strength response, and how your body may adapt to different training demands. It helps position athletic potential as a planning tool rather than a fixed label." : "This category brings together your genetics for inflammatory skin disease, long-term dermatological risk, and protective barrier markers. It is designed to help you understand where your highest clinical attention may be needed and which findings are better suited for prevention rather than concern."}</p>
-              <div className="category-copy-note">Static garden view</div>
+              <p>{comparisonCategory === "physical" ? "This category explains how your genetics may influence visible features, body composition tendencies, muscle response, and environmental sensitivity such as UV exposure. It helps translate phenotype-related markers into practical expectations." : comparisonCategory === "nutrition" ? "This category brings together genetic signals linked to metabolism, appetite regulation, nutrient handling, and how your body may respond to fats, carbohydrates, and key micronutrients. It is designed to support more personalised food decisions." : comparisonCategory === "sports" ? "This category highlights genetics linked to performance style, recovery rate, endurance, strength response, and how your body may adapt to different training demands. It helps position athletic potential as a planning tool rather than a fixed label." : "This category brings together broader health-related genetics, including inherited risk patterns, protective biology, and clinically relevant markers that may support earlier action. It is designed to help you understand where prevention, monitoring, and follow-up may offer the most value."}</p>
+              <div className="category-copy-note">{comparisonCategory === "health" ? "DNA-informed health overview" : "Category overview"}</div>
             </div>
             <div className="category-panel">
               <div className="category-sequence-shell">
-                <img src="/images/garden.jpg" alt="Garden" className="category-sequence-image" />
+                <img src={comparisonCategory === "health" ? "/images/dnasnitch.jpg" : "/images/garden.jpg"} alt={comparisonCategory === "health" ? "DNA health illustration" : "Category illustration"} className="category-sequence-image" />
               </div>
             </div>
           </div>
@@ -1896,8 +1899,8 @@ function ComparisonPage({ showPage, comparisonCategory = "health" }) {
           <img src="/images/happypatient.png" alt="Happy patient" />
           <div className="happyhealth-copy">
             <strong>{comparisonCategory === "physical" ? "Physical Traits Focus" : comparisonCategory === "nutrition" ? "Nutrition Focus" : comparisonCategory === "sports" ? "Sports Focus" : "Health Focus"}</strong>
-            <h2>{comparisonCategory === "physical" ? "Phenotype markers help explain how your body presents and responds." : comparisonCategory === "nutrition" ? "Better nutrition choices start with better biological context." : comparisonCategory === "sports" ? "Performance genetics are most useful when they guide how you train and recover." : "Early understanding supports better skin decisions."}</h2>
-            <p>{comparisonCategory === "physical" ? "These findings are useful when you want more realistic expectations around body composition, recovery style, pigmentation response, and appearance-related planning." : comparisonCategory === "nutrition" ? "Your nutrition profile can help explain why energy balance, satiety, and nutrient response may differ from generic advice, making your eating strategy easier to personalize." : comparisonCategory === "sports" ? "Your sports profile can help reveal where training response may feel more natural, where recovery may need more attention, and which habits support more stable progress over time." : "Your health profile can help highlight where prevention, regular checkups, and barrier-first care may have the biggest long-term value."}</p>
+            <h2>{comparisonCategory === "physical" ? "Phenotype markers help explain how your body presents and responds." : comparisonCategory === "nutrition" ? "Better nutrition choices start with better biological context." : comparisonCategory === "sports" ? "Performance genetics are most useful when they guide how you train and recover." : "Earlier insight supports better health decisions."}</h2>
+            <p>{comparisonCategory === "physical" ? "These findings are useful when you want more realistic expectations around body composition, recovery style, pigmentation response, and appearance-related planning." : comparisonCategory === "nutrition" ? "Your nutrition profile can help explain why energy balance, satiety, and nutrient response may differ from generic advice, making your eating strategy easier to personalize." : comparisonCategory === "sports" ? "Your sports profile can help reveal where training response may feel more natural, where recovery may need more attention, and which habits support more stable progress over time." : "Your health profile can help highlight where prevention, regular checkups, and long-term monitoring may have the biggest practical value."}</p>
           </div>
         </div>
 
