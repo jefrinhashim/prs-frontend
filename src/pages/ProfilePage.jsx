@@ -714,12 +714,10 @@ export default function ProfilePage() {
             </div>
             <div className="name-block">
               <div className="name-row">
-                <h1 className="pname" id="displayName">sdsd</h1>
-                <span className="pro-badge">
-                  <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>PRO
-                </span>
+                
+               
               </div>
-              <p className="prole">Genetic Skin Health Report</p>
+           
               <p className="pid mono" id="userId">{userId}</p>
               <div className="pactions">
                 
